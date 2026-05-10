@@ -1,0 +1,31 @@
+<%-- 
+  contact.ejs
+  Contact/Enquiry page with a form for users to submit messages.
+--%>
+
+<%- include('../partials/header') %>
+
+<section class="mb-5 text-center">
+  <h1 class="display-5">Contact Us</h1>
+  <p class="lead text-muted">Have questions or feedback? We'd love to hear from you.</p>
+</section>
+
+<form action="/contact" method="POST" class="mx-auto" style="max-width: 600px;">
+  <div class="mb-3">
+    <label for="name" class="form-label">Name <span class="text-danger">*</span></label>
+    <input type="text" name="name" placeholder="Your Name" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
+    <input type="email" name="email" placeholder="Your Email" class="form-control" required>
+  </div>
+  <div class="mb-3">
+    <label for="message" class="form-label">Message <span class="text-danger">*</span></label>
+    <textarea name="message" rows="5" placeholder="Your Message" class="form-control" required></textarea>
+  </div>
+  <div class="text-end">
+    <button type="submit" class="btn btn-primary">Send Message</button>
+  </div>
+</form>
+
+<%- include('../partials/footer') %>

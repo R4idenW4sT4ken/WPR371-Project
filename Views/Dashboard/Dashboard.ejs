@@ -1,0 +1,43 @@
+<%-- 
+  Dashboard.ejs
+  Admin dashboard showing analytics and management links.
+--%>
+
+<%- include('../Partials/header') %>
+<div class="container py-4">
+  <h2 class="mb-5 text-center">Analytics Overview</h2>
+  <div class="row g-4 justify-content-center">
+    <div class="col-md-4">
+      <div class="card border-info shadow-sm">
+        <div class="card-body text-center">
+          <i class="bi bi-calendar2-week display-5 text-info mb-2"></i>
+          <h6 class="card-title">Events Hosted</h6>
+          <p class="fs-2 fw-bold mb-0"><%= stats.totalEvents %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-secondary shadow-sm">
+        <div class="card-body text-center">
+          <i class="bi bi-person-check display-5 text-secondary mb-2"></i>
+          <h6 class="card-title">Active Users</h6>
+          <p class="fs-2 fw-bold mb-0"><%= stats.totalUsers %></p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card border-warning shadow-sm">
+        <div class="card-body text-center">
+          <i class="bi bi-clipboard2-check display-5 text-warning mb-2"></i>
+          <h6 class="card-title">Bookings Made</h6>
+          <p class="fs-2 fw-bold mb-0"><%= stats.totalBookings %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-5 text-center">
+    <a href="/admin/events" class="btn btn-outline-info me-2">Event Management</a>
+    <a href="/admin/users" class="btn btn-outline-secondary">User Management</a>
+  </div>
+</div>
+<%- include('../Partials/footer') %>
