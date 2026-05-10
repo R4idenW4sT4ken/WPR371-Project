@@ -1,0 +1,56 @@
+<%-- 
+  events.ejs
+  Event listing page.
+  Displays all upcoming events with search and filter functionality.
+--%>
+
+<%- include('../partials/header') %>
+
+<div class="mb-4">
+  <input id="searchInput" type="text" class="form-control" placeholder="Search events by title or date...">
+</div>
+
+<h1>Upcoming Events</h1>
+
+<section class="mb-5 text-center">
+    <h2 class="display-5">Check out what's happening soon!</h2>
+    <p class="lead text-muted">Join us and make an impact in your community.</p>
+  </section>
+  
+  <div class="row" id="eventList">
+    <% events.forEach((event, index) => { %>
+      <div class="col-lg-4 col-md-6 mb-4 event-item">
+        <div class="card h-100 shadow-sm border-0">
+          <a href="/events/<%= index %>">
+            <img src="<%= event.image %>" class="card-img-top" alt="<%= event.title %>">
+          </a>
+          <div class="card-body">
+            <h5 class="card-title">
+              <a href="/events/<%= index %>" class="text-decoration-none text-dark"><%= event.title %></a>
+            </h5>
+            <ul class="list-unstyled text-muted small mb-0">
+              <li><i class="bi bi-calendar-event me-2"></i><%= event.date %></li>
+              <li><i class="bi bi-geo-alt me-2"></i><%= event.location %></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+
+  <script>
+    const searchInput = document.getElementById("searchInput");
+    const events = document.querySelectorAll(".event-item");
+  
+    searchInput.addEventListener("input", () => {
+      const query = searchInput.value.toLowerCase();
+      events.forEach(item => {
+        const text = item.innerText.toLowerCase();
+        item.style.display = text.includes(query) ? "block" : "none";
+      });
+    });
+  </script>
+  
+<%- include('../partials/footer') %>
+
+<p><%= event.description %></p>
