@@ -113,12 +113,12 @@ module.exports = ({ teamMembers, events, messages }) => {
 
   // 403 Access Denied Page
   router.get('/access-denied', (req, res) => {
-    res.status(403).render('Errors/403');
+    res.status(403).render('../Views/Errors/403');
   });
 
   // 404 handler for unmatched routes in this router
   router.use((req, res) => {
-    res.status(404).render('Errors/404');
+    res.status(404).render('../Errors/404');
   });
 
   return router;

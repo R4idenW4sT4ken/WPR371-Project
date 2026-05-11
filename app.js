@@ -11,7 +11,7 @@ const port = 3000;
 
 // In-memory data arrays
 const teamMembers = [
-  { name: "Ian", role: "Team Lead", image: "ian.jpg" },
+  { name: "Mickayla Combrink", role: "Team Lead", image: "mickayla.jpg" },
   { name: "Hendrik", role: "Frontend Developer", image: "hendrik.jpeg" },
   { name: "Hanre Koen", role: "Backend Developer", image: "kutenda.jpeg" },
   { name: "emmanuel teodor", role: "Database", image: "marius.jpeg" },
@@ -134,6 +134,7 @@ app.use(methodOverride('_method'));
 // Routes
 const pageRoutes = require("./Routes/PageRoutes");
 app.use("/", pageRoutes({ teamMembers, events, messages }));
+
 
 // Start server
 app.listen(port, () => {
