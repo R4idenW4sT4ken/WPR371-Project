@@ -23,8 +23,9 @@ const MONGO_URI =
   process.env.MONGO_URI ||
   process.env.MONGODB_URI ||
   "mongodb://localhost:27017/community_portal";
-mongoose
-  .connect(MONGO_URI, {})
+const mongoose = require("mongoose");
+
+mongoose.connect(MONGO_URI, {})
   .then(() => {
     console.log("[DB] Connected to MongoDB");
   })
@@ -125,7 +126,7 @@ const messages = []; // Contact form submissions
 // Middleware
 app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views/pages"));
+app.set("views", path.join(__dirname, "Views/pages"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
