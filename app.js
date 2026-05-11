@@ -13,37 +13,25 @@ const port = 3000;
 const teamMembers = [
   { name: "Ian", role: "Team Lead", image: "ian.jpg" },
   { name: "Hendrik", role: "Frontend Developer", image: "hendrik.jpeg" },
-  { name: "Kutenda", role: "Backend Developer", image: "kutenda.jpeg" },
-  { name: "Marius", role: "Documentation Manager", image: "marius.jpeg" }
+  { name: "Hanre Koen", role: "Backend Developer", image: "kutenda.jpeg" },
+  { name: "emmanuel teodor", role: "Database", image: "marius.jpeg" },
+  { name: "emmanuel chinomoso", role: "Security", image: "marius.jpeg" }
 ];
 
-
-const mongoose = require('mongoose'); // make sure mongoose is installed
-// 1) Read the Mongo URI from an environment variable
-const MONGO_URI = process.env.MONGO_URI || process.env.MONGODB_URI;
-// 2) Connect to MongoDB
+// MongoDB connection (keep this for future DB work)
+const MONGO_URI =
+  process.env.MONGO_URI ||
+  process.env.MONGODB_URI ||
+  "mongodb://localhost:27017/community_portal";
 mongoose
-.connect(MONGO_URI, {})
-// no hardcoded URI in code; database engineer must set env var
-.then(() => {
-console.log('[DB] Connected to MongoDB');
-})
-.catch((err) => {
-console.error('[DB] MongoDB connection error:', err);
-// Decide behavior:
-// - Option A: crash so you notice immediately
-//   process.exit(1);
-// - Option B: keep running if DB isn’t required for all pages
-});
-
-// What the other person must replace/configure
-// Replace NOTHING in code; they must set:
-//   process.env.MONGO_URI = "mongodb+srv://..."   (Atlas)
-//   OR
-//   process.env.MONGO_URI = "mongodb://..."       (Local)
-
-// Example (Windows PowerShell):
-//   setx MONGO_URI "PASTE_YOUR_URI_HERE"
+  .connect(MONGO_URI, {})
+  .then(() => {
+    console.log("[DB] Connected to MongoDB");
+  })
+  .catch((err) => {
+    console.error("[DB] MongoDB connection error:", err);
+    // Optionally: process.exit(1);
+  });
 
 
 
