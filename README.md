@@ -67,17 +67,23 @@ A full-stack web application built for Advanced Events (Pty) Ltd to manage event
 ```
 
 4. Create a `.env` file in the root directory with the following:
+```text
 MONGO_URI=mongodb://localhost:27017/wpr371
 SESSION_SECRET=supersecretkey123
 PORT=3000
+ADMIN_EMAIL=admin@example.com
+ADMIN_PASSWORD=AdminPass123
+```
 
 5. Start the development server:
 ```bash
-   node app.js
+   npm run dev
 ```
 
 6. Open your browser and go to:
 http://localhost:3000
+
+> Optional: If you do not configure `ADMIN_EMAIL` and `ADMIN_PASSWORD`, the application will still run but you will need to register a user normally. Setting these variables creates an admin account automatically on startup.
 
 ## Security Implementation
 - Passwords are hashed using **bcrypt** with 10 salt rounds before storage
