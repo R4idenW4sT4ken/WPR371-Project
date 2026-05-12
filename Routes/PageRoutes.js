@@ -25,17 +25,17 @@ module.exports = ({ teamMembers, events, messages }) => {
   // Home Page - Shows a random featured event
   router.get('/', (req, res) => {
     const { event, index } = getRandomEvent(events);
-    res.render('home', { featuredEvent: event, index, teamMembers });
+    res.render('pages/home', { featuredEvent: event, index, teamMembers });
   });
 
  // About Page
   router.get('/about', (req, res) => {
-    res.status(200).render('about', { teamMembers });
+    res.status(200).render('pages/about', { teamMembers });
   });
 
   // Events Page
   router.get('/events', (req, res) => {
-    res.status(200).render('events', { events });
+    res.status(200).render('pages/events', { events });
   });
 
   // Event Detail Page
@@ -50,7 +50,7 @@ module.exports = ({ teamMembers, events, messages }) => {
     const prevIndex = index > 0 ? index - 1 : null;
     const nextIndex = index < events.length - 1 ? index + 1 : null;
 
-    res.status(200).render('eventDetail', {
+    res.status(200).render('pages/eventDetail', {
       event,
       prevIndex,
       nextIndex
@@ -59,17 +59,72 @@ module.exports = ({ teamMembers, events, messages }) => {
 
   // Contact Page
   router.get('/contact', (req, res) => {
-    res.status(200).render('contact');
+    res.status(200).render('pages/contact');
+  });
+
+  // Contact form submission
+  router.post('/contact', (req, res) => {
+    const { name, email, message } = req.body;
+    if (!name || !email || !message) {
+      return res.status(400).send('Please fill in all required fields.');
+    }
+
+    messages.push({ name, email, message, createdAt: new Date() });
+    res.redirect('/thankyou');
   });
 
   // Thank You Page
   router.get('/thankyou', (req, res) => {
-    res.status(200).render('thankyou');
+    res.status(200).render('pages/thankyou');
   });
 
   // Admin Form Page
   router.get('/admin', (req, res) => {
-    res.render('admin');
+    res.render('pages/admin');
+  });
+
+  // Create a new event from admin page
+  router.post('/admin', (req, res) => {
+    const { title, date, location, image } = req.body;
+    if (!title || !date || !location || !image) {
+      return res.status(400).send('All event fields are required.');
+    }
+
+    events.push({
+      title,
+      date,
+      location,
+      image,
+      description: 'Details coming soon.',
+      details: 'Details coming soon.',
+      rules: 'Please follow event rules.',
+      bring: 'Bring yourself and a positive attitude.',
+      weather: 'No weather updates available.',
+      dress: 'Dress comfortably.',
+      parking: 'Parking information will be provided.',
+      accessibility: 'Accessibility information will be shared soon.',
+      food: 'Food information will be shared soon.'
+    });
+
+    res.redirect('/events');
+  });
+
+  router.get('/admin/events', (req, res) => {
+    res.redirect('/admin');
+  });
+
+  router.get('/admin/users', (req, res) => {
+    res.send('User management is coming soon.');
+  });
+
+  // Dashboard Page
+  router.get('/dashboard', (req, res) => {
+    const stats = {
+      totalEvents: events.length,
+      totalUsers: 0,
+      totalBookings: 0
+    };
+    res.render('Dashboard/Dashboard', { stats });
   });
 
   // Delete Event Page
@@ -113,13 +168,14 @@ module.exports = ({ teamMembers, events, messages }) => {
 
   // 403 Access Denied Page
   router.get('/access-denied', (req, res) => {
-    res.status(403).render('../Views/Errors/403');
+    res.status(403).render('Errors/403');
   });
 
   // 404 handler for unmatched routes in this router
   router.use((req, res) => {
-    res.status(404).render('../Errors/404');
+    res.status(404).render('Errors/404');
   });
+
 
   return router;
 };

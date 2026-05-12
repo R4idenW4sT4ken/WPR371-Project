@@ -9,7 +9,8 @@ const methodOverride = require('method-override');
 
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
+const sessionSecret = process.env.SESSION_SECRET || 'keyboardcat';
 
 // In-memory data arrays
 const teamMembers = [
@@ -24,9 +25,9 @@ const teamMembers = [
 const MONGO_URI =
   process.env.MONGO_URI ||
   process.env.MONGODB_URI ||
-  "mongodb://localhost:27017/community_portal";
-mongoose
-  .connect(MONGO_URI, {})
+  "mongodb://127.0.0.1:27017/community_portal";
+const mongoose = require("mongoose");
+  mongoose.connect(MONGO_URI, {})
   .then(() => {
     console.log("[DB] Connected to MongoDB");
   })
@@ -125,13 +126,13 @@ let events = [
 const messages = []; // Contact form submissions
 
 // Middleware
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, "Public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "Views"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: sessionSecret,
   resave: false,
   saveUninitialized: false,
   cookie: { secure: false }
@@ -139,13 +140,10 @@ app.use(session({
 
 // Routes
 const authRoutes = require("./Routes/auth");
-app.use("/", authRoutes);
+const pageRoutes = require("./Routes/PageRoutes");
 
-app.get("/", (req, res) => {
-  res.send(`Welcome ${req.session.user ? req.session.user.name : 'Guest'}`);
-});
-//const pageRoutes = require("./Routes/PageRoutes");
-//app.use("/", pageRoutes({ teamMembers, events, messages }));
+app.use('/', authRoutes);
+app.use('/', pageRoutes({ teamMembers, events, messages }));
 
 // Global error handler
 app.use((err, req, res, next) => {
