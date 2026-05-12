@@ -20,9 +20,15 @@ body {
   }
   
   /* Navbar */
-  .navbar {
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1030;    
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-  }
+    transition: top 0.4s ease-in-out;
+    background-color: #90ee90!important; /* Example: light green */
+}
   
   .nav-link {
     font-weight: 500;
@@ -68,23 +74,23 @@ body {
   
   /* Buttons */
   .btn-primary {
-    background-color: #0d6efd;
+    background-color: #90ee90;
     border: none;
   }
   
   .btn-outline-primary {
-    border: 2px solid #0d6efd;
-    color: #0d6efd;
+    border: 2px solid #90ee90;
+    color: #90ee90;
   }
   
   .btn-outline-primary:hover {
-    background-color: #0d6efd;
+    background-color: #90ee90;
     color: #fff;
   }
   
   /* Footer */
   footer {
-    background: linear-gradient(to right, #0062e6, #004aad);
+    background: linear-gradient(to right, #90ee90, #90ee90);
     color: #fff;
     padding-top: 1rem;
     padding-bottom: 1rem;
