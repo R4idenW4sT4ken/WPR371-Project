@@ -1,11 +1,29 @@
-<%-- 
-  Register.ejs
-  User registration page for creating a new account.
---%>
-
 <%- include('../Partials/header') %>
-
-
-
-
+<div class="row justify-content-center">
+  <div class="col-md-6">
+    <h2 class="mb-4 text-center">Register</h2>
+    <form action="/register" method="POST" class="card p-4 shadow-sm">
+      <div class="mb-3">
+        <label class="form-label">Full Name</label>
+        <input type="text" name="name" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input type="email" name="email" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <input type="password" name="password" class="form-control" required>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Confirm Password</label>
+        <input type="password" name="confirmPassword" class="form-control" required>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Register</button>
+      <div class="text-center mt-3">
+        <a href="/login">Already have an account? Login</a>
+      </div>
+    </form>
+  </div>
+</div>
 <%- include('../Partials/footer') %>

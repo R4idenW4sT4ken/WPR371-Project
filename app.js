@@ -1,5 +1,7 @@
 // app.js
 
+require("dotenv").config();
+const session = require("express-session");
 const express = require("express");
 const path = require("path");
 const bodyParser = require("body-parser");
@@ -11,7 +13,7 @@ const port = 3000;
 
 // In-memory data arrays
 const teamMembers = [
-  { name: "Mickayla Combrink", role: "Team Lead", image: "mickayla.jpg" },
+  { name: "Ian", role: "Team Lead", image: "ian.jpg" },
   { name: "Hendrik", role: "Frontend Developer", image: "hendrik.jpeg" },
   { name: "Hanre Koen", role: "Backend Developer", image: "kutenda.jpeg" },
   { name: "emmanuel teodor", role: "Database", image: "marius.jpeg" },
@@ -23,9 +25,8 @@ const MONGO_URI =
   process.env.MONGO_URI ||
   process.env.MONGODB_URI ||
   "mongodb://localhost:27017/community_portal";
-const mongoose = require("mongoose");
-
-mongoose.connect(MONGO_URI, {})
+mongoose
+  .connect(MONGO_URI, {})
   .then(() => {
     console.log("[DB] Connected to MongoDB");
   })
@@ -126,15 +127,34 @@ const messages = []; // Contact form submissions
 // Middleware
 app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "Views/pages"));
+app.set("views", path.join(__dirname, "Views"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
-
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: { secure: false }
+}));
 
 // Routes
-const pageRoutes = require("./Routes/PageRoutes");
-app.use("/", pageRoutes({ teamMembers, events, messages }));
+const authRoutes = require("./Routes/auth");
+app.use("/", authRoutes);
 
+app.get("/", (req, res) => {
+  res.send(`Welcome ${req.session.user ? req.session.user.name : 'Guest'}`);
+});
+//const pageRoutes = require("./Routes/PageRoutes");
+//app.use("/", pageRoutes({ teamMembers, events, messages }));
+
+// Global error handler
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(err.status || 500).render("Errors/error", {
+    message: err.message || "Something went wrong.",
+    status: err.status || 500
+  });
+});
 
 // Start server
 app.listen(port, () => {
