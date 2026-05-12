@@ -153,6 +153,9 @@ app.use(session({
 const authRoutes = require("./Routes/auth");
 app.use("/", authRoutes);
 
+app.get("/", (req, res) => {
+  res.send(`Welcome ${req.session.user ? req.session.user.name : 'Guest'}`);
+});
 //const pageRoutes = require("./Routes/PageRoutes");
 //app.use("/", pageRoutes({ teamMembers, events, messages }));
 
