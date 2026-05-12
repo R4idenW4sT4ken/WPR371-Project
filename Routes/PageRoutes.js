@@ -304,8 +304,59 @@ module.exports = ({ teamMembers }) => {
     }
   });
 
-  router.get('/admin/users', isAdmin, (req, res) => {
-    res.send('User management is coming soon.');
+  router.get('/admin/users', isAdmin, async (req, res, next) => {
+    try {
+      const users = await User.find().sort({ createdAt: -1 }).lean();
+      res.render('pages/adminUsers', { users });
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  router.put('/admin/users/:id/role', isAdmin, async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).render('Errors/404');
+      }
+      const user = await User.findById(id);
+      if (!user) {
+        return res.status(404).render('Errors/404');
+      }
+      if (user.role === 'admin') {
+        user.role = 'user';
+      } else {
+        user.role = 'admin';
+      }
+      await user.save();
+      res.redirect('/admin/users');
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  router.delete('/admin/users/:id', isAdmin, async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).render('Errors/404');
+      }
+      const user = await User.findById(id);
+      if (!user) {
+        return res.status(404).render('Errors/404');
+      }
+      if (req.session.user.id === user._id.toString()) {
+        return res.status(400).send('Admin users cannot delete themselves.');
+      }
+      await User.findByIdAndDelete(id);
+      res.redirect('/admin/users');
+    } catch (err) {
+      next(err);
+    }
+  });
+
+  router.get('/access-denied', (req, res) => {
+    res.status(403).render('Errors/403');
   });
 
   router.get('/dashboard', isAuthenticated, async (req, res, next) => {
