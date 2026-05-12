@@ -25,17 +25,17 @@ module.exports = ({ teamMembers, events, messages }) => {
   // Home Page - Shows a random featured event
   router.get('/', (req, res) => {
     const { event, index } = getRandomEvent(events);
-    res.render('pages/home', { featuredEvent: event, index, teamMembers });
+    res.render('home', { featuredEvent: event, index, teamMembers });
   });
 
  // About Page
   router.get('/about', (req, res) => {
-    res.status(200).render('pages/about', { teamMembers });
+    res.status(200).render('about', { teamMembers });
   });
 
   // Events Page
   router.get('/events', (req, res) => {
-    res.status(200).render('pages/events', { events });
+    res.status(200).render('events', { events });
   });
 
   // Event Detail Page
@@ -50,7 +50,7 @@ module.exports = ({ teamMembers, events, messages }) => {
     const prevIndex = index > 0 ? index - 1 : null;
     const nextIndex = index < events.length - 1 ? index + 1 : null;
 
-    res.status(200).render('pages/eventDetail', {
+    res.status(200).render('eventDetail', {
       event,
       prevIndex,
       nextIndex
@@ -59,22 +59,22 @@ module.exports = ({ teamMembers, events, messages }) => {
 
   // Contact Page
   router.get('/contact', (req, res) => {
-    res.status(200).render('pages/contact');
+    res.status(200).render('contact');
   });
 
   // Thank You Page
   router.get('/thankyou', (req, res) => {
-    res.status(200).render('pages/thankyou');
+    res.status(200).render('thankyou');
   });
 
   // Admin Form Page
   router.get('/admin', (req, res) => {
-    res.render('pages/admin');
+    res.render('admin');
   });
 
   // Delete Event Page
   router.get("/delete-event", (req, res) => {
-    res.render("pages/deleteEvent", {
+    res.render("deleteEvent", {
       events,
       message: "Choose an event to delete.",
       success: true
@@ -113,12 +113,12 @@ module.exports = ({ teamMembers, events, messages }) => {
 
   // 403 Access Denied Page
   router.get('/access-denied', (req, res) => {
-    res.status(403).render('Errors/403');
+    res.status(403).render('../Views/Errors/403');
   });
 
   // 404 handler for unmatched routes in this router
   router.use((req, res) => {
-    res.status(404).render('Errors/404');
+    res.status(404).render('../Errors/404');
   });
 
   return router;
