@@ -5,22 +5,30 @@
 
 <%- include('../Partials/header') %>
 <h2 class="mb-4">My Bookings</h2>
-<table class="table table-striped">
-  <thead>
-    <tr>
-      <th>Event</th>
-      <th>Date</th>
-      <th>Status</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% bookings.forEach(booking => { %>
-      <tr>
-        <td><%= booking.eventTitle %></td>
-        <td><%= booking.date %></td>
-        <td><%= booking.status %></td>
-      </tr>
-    <% }) %>
-  </tbody>
-</table>
+<% if (!bookings || bookings.length === 0) { %>
+  <div class="alert alert-info">You have not booked any events yet.</div>
+<% } else { %>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Event</th>
+          <th>Date</th>
+          <th>Tickets</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% bookings.forEach(booking => { %>
+          <tr>
+            <td><%= booking.eventTitle %></td>
+            <td><%= booking.date %></td>
+            <td><%= booking.tickets %></td>
+            <td><%= booking.status %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+<% } %>
 <%- include('../Partials/footer') %>

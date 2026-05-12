@@ -1,0 +1,42 @@
+<%- include('../Partials/header') %>
+
+<section class="mb-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Admin Event Management</h2>
+    <a href="/admin/events/new" class="btn btn-success">Add New Event</a>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Date</th>
+          <th>Location</th>
+          <th>Capacity</th>
+          <th>Booked</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% events.forEach(event => { %>
+          <tr>
+            <td><%= event.title %></td>
+            <td><%= event.date ? new Date(event.date).toISOString().slice(0, 10) : 'TBD' %></td>
+            <td><%= event.location %></td>
+            <td><%= event.capacity %></td>
+            <td><%= event.ticketsBooked %></td>
+            <td>
+              <a href="/admin/events/<%= event._id %>/edit" class="btn btn-sm btn-primary me-2">Edit</a>
+              <form action="/admin/events/<%= event._id %>?_method=DELETE" method="POST" class="d-inline">
+                <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this event?');">Delete</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<%- include('../Partials/footer') %>

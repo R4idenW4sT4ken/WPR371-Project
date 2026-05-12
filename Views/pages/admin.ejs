@@ -1,28 +1,85 @@
-<%# 
-  admin.ejs
-  Admin page for posting a new event.
-  Contains a form for event creation.
-%>
-
 <%- include('../Partials/header') %>
 
-<h2 class="mb-4">Add New Event</h2>
-<form method="POST" action="/admin" class="mx-auto" style="max-width: 600px;">
+<h2 class="mb-4">Create New Event</h2>
+
+<% if (errors && errors.length) { %>
+  <div class="alert alert-danger">
+    <ul class="mb-0">
+      <% errors.forEach(error => { %>
+        <li><%= error %></li>
+      <% }) %>
+    </ul>
+  </div>
+<% } %>
+
+<form method="POST" action="/admin/events" class="mx-auto" style="max-width: 700px;">
   <div class="mb-3">
     <label class="form-label">Title</label>
-    <input type="text" name="title" class="form-control" required>
+    <input type="text" name="title" class="form-control" value="<%= formData.title || '' %>" required>
   </div>
   <div class="mb-3">
-    <label class="form-label">Date</label>
-    <input type="date" name="date" class="form-control" required>
+    <label class="form-label">Category</label>
+    <input type="text" name="category" class="form-control" value="<%= formData.category || '' %>">
+  </div>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Date</label>
+      <input type="date" name="date" class="form-control" value="<%= formData.date || '' %>" required>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Location</label>
+      <input type="text" name="location" class="form-control" value="<%= formData.location || '' %>" required>
+    </div>
   </div>
   <div class="mb-3">
-    <label class="form-label">Location</label>
-    <input type="text" name="location" class="form-control" required>
+    <label class="form-label">Capacity</label>
+    <input type="number" name="capacity" min="0" class="form-control" value="<%= formData.capacity || 0 %>">
   </div>
   <div class="mb-3">
     <label class="form-label">Image URL</label>
-    <input type="text" name="image" class="form-control" required>
+    <input type="text" name="image" class="form-control" value="<%= formData.image || '' %>" required>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Description</label>
+    <textarea name="description" class="form-control" rows="3"><%= formData.description || '' %></textarea>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Details</label>
+    <textarea name="details" class="form-control" rows="3"><%= formData.details || '' %></textarea>
+  </div>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Rules</label>
+      <textarea name="rules" class="form-control" rows="2"><%= formData.rules || '' %></textarea>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">What to Bring</label>
+      <textarea name="bring" class="form-control" rows="2"><%= formData.bring || '' %></textarea>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Weather</label>
+      <textarea name="weather" class="form-control" rows="2"><%= formData.weather || '' %></textarea>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Dress Code</label>
+      <textarea name="dress" class="form-control" rows="2"><%= formData.dress || '' %></textarea>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Parking</label>
+      <textarea name="parking" class="form-control" rows="2"><%= formData.parking || '' %></textarea>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label class="form-label">Accessibility</label>
+      <textarea name="accessibility" class="form-control" rows="2"><%= formData.accessibility || '' %></textarea>
+    </div>
+  </div>
+  <div class="mb-3">
+    <label class="form-label">Food</label>
+    <textarea name="food" class="form-control" rows="2"><%= formData.food || '' %></textarea>
   </div>
   <div class="text-end">
     <button type="submit" class="btn btn-success">Add Event</button>

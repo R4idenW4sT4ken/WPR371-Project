@@ -9,13 +9,34 @@
 <section class="text-center py-5 bg-light">
   <h1 class="display-4 fw-bold">Welcome to the Community Portal</h1>
   <p class="lead text-muted">Connecting people, promoting events, and building a better future together.</p>
-  <a href="/admin" class="btn btn-outline-primary mt-3">Post a New Event (Admin)</a>
+  <% if (user && user.role === 'admin') { %>
+    <a href="/admin/events/new" class="btn btn-outline-primary mt-3">Post a New Event</a>
+  <% } else if (!user) { %>
+    <a href="/login" class="btn btn-outline-primary mt-3">Login to Book Events</a>
+  <% } %>
 </section>
 
 <section class="bg-primary text-white py-5">
-  <div class="container text-center">
-    <h2 class="mb-4">Featured Event</h2>
-    <div id="featuredEvent" class="col-md-8 offset-md-2"></div>
+  <div class="container">
+    <h2 class="mb-4 text-center">Featured Event</h2>
+    <% if (featuredEvent) { %>
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="card border-0 shadow-sm bg-light text-dark">
+            <img src="<%= featuredEvent.image %>" class="card-img-top" alt="<%= featuredEvent.title %>">
+            <div class="card-body">
+              <h3 class="card-title"><%= featuredEvent.title %></h3>
+              <p class="card-text"><%= featuredEvent.description || 'Learn more about this event and join us.' %></p>
+              <p class="mb-1"><strong>Date:</strong> <%= featuredEvent.date ? new Date(featuredEvent.date).toISOString().slice(0, 10) : 'TBD' %></p>
+              <p class="mb-0"><strong>Location:</strong> <%= featuredEvent.location %></p>
+              <a href="/events/<%= featuredEvent._id %>" class="btn btn-primary mt-3">View Event</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% } else { %>
+      <p class="lead">No featured event is available yet. Check back soon.</p>
+    <% } %>
   </div>
 </section>
 

@@ -13,7 +13,7 @@ function isAdmin(req, res, next) {
   if (req.session && req.session.user && req.session.user.role === "admin") {
     return next();
   }
-  res.status(403).send("Access denied. Admins only.");
+  res.redirect('/access-denied');
 }
 
 module.exports = { isAuthenticated, isAdmin };
