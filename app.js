@@ -11,7 +11,7 @@ const port = 3000;
 
 // In-memory data arrays
 const teamMembers = [
-  { name: "Ian", role: "Team Lead", image: "ian.jpg" },
+  { name: "Mickayla Combrink", role: "Team Lead", image: "mickayla.jpg" },
   { name: "Hendrik", role: "Frontend Developer", image: "hendrik.jpeg" },
   { name: "Hanre Koen", role: "Backend Developer", image: "kutenda.jpeg" },
   { name: "emmanuel teodor", role: "Database", image: "marius.jpeg" },
@@ -23,8 +23,9 @@ const MONGO_URI =
   process.env.MONGO_URI ||
   process.env.MONGODB_URI ||
   "mongodb://localhost:27017/community_portal";
-mongoose
-  .connect(MONGO_URI, {})
+const mongoose = require("mongoose");
+
+mongoose.connect(MONGO_URI, {})
   .then(() => {
     console.log("[DB] Connected to MongoDB");
   })
@@ -125,7 +126,7 @@ const messages = []; // Contact form submissions
 // Middleware
 app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views/pages"));
+app.set("views", path.join(__dirname, "Views/pages"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(methodOverride('_method'));
 
@@ -133,6 +134,7 @@ app.use(methodOverride('_method'));
 // Routes
 const pageRoutes = require("./Routes/PageRoutes");
 app.use("/", pageRoutes({ teamMembers, events, messages }));
+
 
 // Start server
 app.listen(port, () => {
