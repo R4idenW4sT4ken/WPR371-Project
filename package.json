@@ -1,33 +1,12 @@
 {
-  "name": "project",
-  "version": "1.0.0",
-  "description": "A dynamic and responsive portal for Advanced Events (Pty) Lt. Built using Node.js, Express.js, EJS, CSS, and HTML this platform enables easy event access, user communication, and content management.",
-  "main": "app.js",
-  "scripts": {
-    "dev": "nodemon app.js",
-    "start": "node app.js"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "devDependencies": {
-    "nodemon": "^3.1.14"
-  },
   "dependencies": {
-    "body-parser": "^2.2.0",
-    "community-portal": "file:",
-    "ejs": "^3.1.10",
-    "express": "^4.21.2",
+    "bcrypt": "^6.0.0",
+    "body-parser": "^2.2.2",
+    "dotenv": "^17.4.2",
+    "ejs": "^5.0.2",
+    "express": "^5.2.1",
+    "express-session": "^1.19.0",
     "method-override": "^3.0.0",
     "mongoose": "^9.6.2"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/R4idenW4sT4ken/WPR371-Project.git"
-  },
-  "bugs": {
-    "url": "https://github.com/R4idenW4sT4ken/WPR371-Project/issues"
-  },
-  "homepage": "https://github.com/R4idenW4sT4ken/WPR371-Project#readme"
+  }
 }
