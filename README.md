@@ -1,14 +1,25 @@
 # Smart Event Management & Ticketing Platform
 
-## Project Overview
-A full-stack web application built for Advanced Events (Pty) Ltd to manage events, ticket sales, and customer engagement. Built with Node.js, Express, EJS, and MongoDB.
+## Overview
+A Node.js and Express web application for managing community events, bookings, enquiries, and user accounts. The app uses EJS for server-side rendering and MongoDB for persistent data storage.
 
-## Technologies Used
-- **Backend:** Node.js, Express.js
-- **Frontend:** EJS, HTML5, CSS3, Bootstrap
-- **Database:** MongoDB, Mongoose
-- **Security:** bcrypt, express-session
-- **Tools:** dotenv, nodemon, method-override
+## Key Features
+- Event listing, creation, editing, and deletion
+- Booking and enquiry management
+- User authentication and session handling
+- Admin and regular user role-based access control
+- Responsive UI built with Bootstrap and custom styles
+- Static assets served from `Public/`
+
+## Technology Stack
+- Node.js
+- Express.js
+- EJS templates
+- MongoDB with Mongoose
+- bcrypt for password hashing
+- express-session for session state
+- dotenv for configuration
+- nodemon for local development
 
 ## Team Members and Roles
 
@@ -47,47 +58,64 @@ A full-stack web application built for Advanced Events (Pty) Ltd to manage event
 ## Setup Instructions
 
 ### Prerequisites
-- Node.js installed
+- Node.js installed (recommended v18+)
+- npm installed
 - MongoDB installed and running locally
 
 ### Installation
 1. Clone the repository:
 ```bash
-   git clone https://github.com/R4idenW4sT4ken/WPR371-Project.git
+git clone https://github.com/R4idenW4sT4ken/WPR371-Project.git
 ```
 
 2. Navigate to the project folder:
 ```bash
-   cd WPR371-Project
+cd WPR371-Project
 ```
 
 3. Install dependencies:
 ```bash
-   npm install
+npm install
 ```
 
-4. Create a `.env` file in the root directory with the following:
+4. Create a `.env` file in the project root with:
 ```text
-MONGO_URI=mongodb://localhost:27017/wpr371
-SESSION_SECRET=supersecretkey123
-PORT=3000
-ADMIN_EMAIL=admin@example.com
-ADMIN_PASSWORD=AdminPass123
+MONGO_URI="mongodb+srv://user2:12345@cluster0.jydcqps.mongodb.net/community_portal?retryWrites=true&w=majority"
+
+user email = user2
+user password = 12345
 ```
 
-5. Start the development server:
+5. Start the application in development mode:
 ```bash
-   npm run dev
+npm run dev
 ```
 
-6. Open your browser and go to:
+6. Open your browser at:
+```text
 http://localhost:3000
+```
 
-> Optional: If you do not configure `ADMIN_EMAIL` and `ADMIN_PASSWORD`, the application will still run but you will need to register a user normally. Setting these variables creates an admin account automatically on startup.
+## Environment Variables
+- `MONGO_URI` — MongoDB connection string
+- `SESSION_SECRET` — Session secret for express-session
+- `PORT` — Port to run the app on (default `3000`)
+- `ADMIN_EMAIL` — Optional admin account email created automatically on first startup
+- `ADMIN_PASSWORD` — Optional admin account password created automatically on first startup
+
+## Notes on Recent Changes
+- Team images now load from `Public/images/team/`
+- `member.image` values in `app.js` are filenames only, not full paths
+- Static assets are served from the `Public/` directory
+- `about.ejs` now uses the same team image URL pattern as `home.ejs`
 
 ## Security Implementation
-- Passwords are hashed using **bcrypt** with 10 salt rounds before storage
-- User sessions managed with **express-session**
-- Role-based access control separates Admin and standard User permissions
-- Environment variables managed securely with **dotenv**
-- Authentication and authorization enforced via custom middleware
+- Passwords are hashed with **bcrypt** before storage
+- Sessions are managed with **express-session**
+- Role-based access is enforced by middleware
+- Sensitive values are loaded from `.env`
+
+## Troubleshooting
+- If MongoDB does not connect, verify `MONGO_URI` and that the database service is running
+- If team images do not appear, ensure the files exist in `Public/images/team/` and match the names in `app.js`
+- Use `npm run dev` for auto-restart during development
