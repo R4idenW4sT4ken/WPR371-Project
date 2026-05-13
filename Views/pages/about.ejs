@@ -1,4 +1,4 @@
-<%- include('../partials/header') %>
+<%- include('../Partials/header') %>
 
 <h1>About Us</h1>
 
@@ -12,14 +12,13 @@
     <div class="col-md-3 col-sm-6 mb-4">
       <div class="card shadow-sm border-0 h-100 text-center">
         <div class="card-body">
-          <i class="bi bi-person-circle display-3 text-primary mb-3"></i>
+          <img src="/images/team/<%= member.image %>" class="card-img-top rounded-circle mx-auto" alt="<%= member.name %>" style="width: 120px; height: 120px; object-fit: cover;">
           <h5 class="card-title mb-1"><%= member.name %></h5>
           <p class="text-muted small"><%= member.role %></p>
-          <img src="<%= member.image %>" alt="Profile" class="img-fluid mt-2">
         </div>
       </div>
     </div>
   <% }) %>
 </div>
 
-<%- include('../partials/footer') %>
+<%- include('../Partials/footer') %>
