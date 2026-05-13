@@ -84,11 +84,10 @@ npm install
 
 4. Create a `.env` file in the project root with the following variables:
 ```text
-MONGO_URI=mongodb+srv://<username>:<password>@cluster0.jydcqps.mongodb.net/community_portal?retryWrites=true&w=majority
-SESSION_SECRET=your_session_secret_here
-PORT=3000
-ADMIN_EMAIL=admin@example.com
-ADMIN_PASSWORD=your_admin_password
+MONGO_URI="mongodb+srv://user2:12345@cluster0.jydcqps.mongodb.net/community_portal?retryWrites=true&w=majority"
+
+Username: user2
+password: 12345
 ```
 
 5. Start the application in development mode:
