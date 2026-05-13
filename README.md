@@ -26,18 +26,20 @@ A full-stack web application built for Advanced Events (Pty) Ltd to manage event
 
 ## Team Members and Roles
 
-### 👩‍💼 Role 1: Team Lead / Project Coordinator
+### 👩‍💼 Role 1: Team Lead / Project Coordinator / Co Backend developer
 **Mickayla Combrink (602923)**
 - Oversee project progress and ensure deadlines are met
 - Coordinate tasks among team members and manage GitHub collaboration
 - Ensure MVC architecture is consistently applied across all modules
 - Prepare and lead the final presentation
+- Co Backend developer
 
 ### 🖥️ Role 2: Backend Developer
 **Hanre Koen (601225)**
 - Implement core server logic using Node.js and Express
 - Develop controllers for authentication, event management, booking, and enquiries
 - Integrate middleware for error handling, authentication, and authorization
+- Develop CRUD operations 
 
 ### 🎨 Role 3: Frontend Developer
 **Hendrik Stephanus Smith (600519)**
@@ -94,7 +96,7 @@ npm run dev
 
 6. Open your browser at:
 ```text
-http://localhost:3000
+http://localhost:8000
 ```
 
 ## Environment Variables
