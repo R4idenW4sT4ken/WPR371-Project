@@ -83,9 +83,9 @@ npm install
 ```
 
 4. Create a `.env` file in the root directory with the following:
-MONGO_URI=mongodb://localhost:27017/wpr371
-SESSION_SECRET=supersecretkey123
-PORT=3000
+MONGO_URI="mongodb+srv://user2:12345@cluster0.jydcqps.mongodb.net/community_portal?retryWrites=true&w=majority"
+
+PORT=8000
 
 5. Start the development server:
 ```bash
