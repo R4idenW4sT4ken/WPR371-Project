@@ -13,11 +13,11 @@ const port = process.env.PORT || 3000;
 const sessionSecret = process.env.SESSION_SECRET || 'keyboardcat';
 
 const teamMembers = [
-  { name: "Mickayla Combrink", role: "Team Lead", image: "mickayla.jpg" },
-  { name: "Hendrik", role: "Frontend Developer", image: "hendrik.jpeg" },
-  { name: "Hanre Koen", role: "Backend Developer", image: "Hanre.jpeg" },
-  { name: "Emmanuel Teodor", role: "Database", image: "EmmanuelT.jpeg" },
-  { name: "Emmanuel Chinomoso", role: "Security", image: "EmmanuelC.jpeg" }
+  { name: "Mickayla Combrink", role: "Team Lead", image: "Public/images/mickayla.jpeg" },
+  { name: "Hendrik", role: "Frontend Developer", image: "Public/images/hendrik.jpeg" },
+  { name: "Hanre Koen", role: "Backend Developer", image: "Public/images/Hanre.jpeg" },
+  { name: "Emmanuel Teodor", role: "Database", image: "Public/images/EmmanuelT.jpeg" },
+  { name: "Emmanuel Chinomoso", role: "Security", image: "Public/images/EmmanuelC.jpeg" }
 ];
 
 const MONGO_URI =
