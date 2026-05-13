@@ -16,8 +16,8 @@ const teamMembers = [
   { name: "Mickayla Combrink", role: "Team Lead", image: "mickayla.jpeg" },
   { name: "Hendrik", role: "Frontend Developer", image: "hendrik.jpeg" },
   { name: "Hanre Koen", role: "Backend Developer", image: "Hanre.jpeg" },
-  { name: "Emmanuel Nzotta", role: "Database", image: "emmanaulNzotta.jpeg" },
-  { name: "Emmanaul", role: "Security", image: "emmanaul.jpeg" }
+  { name: "Emmanuel Nzotta", role: "Database", image: "emmanuelNzotta.jpeg" },
+  { name: "Emmanuel", role: "Security", image: "emmanuel.jpeg" }
 ];
 
 const MONGO_URI =
